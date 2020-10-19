@@ -5,10 +5,6 @@ from babel.numbers import format_currency
 
 os.system("clear")
 
-"""
-Use the 'format_currency' function to format the output of the conversion
-format_currency(AMOUNT, CURRENCY_CODE, locale="ko_KR" (no need to change this one))
-"""
 
 def get_data():
   url = "https://www.iban.com/currency-codes"
@@ -22,11 +18,12 @@ def get_data():
     name = row.select("td")[0].text
     code =  row.select("td")[2].text
     if name and code:
-      country_info = {
-        'name' : name.capitalize(),
-        'code' : code
-      }
-      countries.append(country_info)
+      if name != "No universal currency":
+        country_info = {
+          'name' : name.capitalize(),
+          'code' : code
+        }
+        countries.append(country_info)
 
   return countries
 
